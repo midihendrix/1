@@ -1,0 +1,28 @@
+<html>
+<head></head>
+<body>
+
+<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+<div id="map"></div>
+
+<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+<script>
+window.onload = function() {
+  cartodb.createVis('map', 'https://cmcgns.carto.com/api/v2/viz/16678d2a-9d31-11e6-9098-0ee66e2c9693/viz.json', { description: false, search: false, shareable: false })
+      .on('done', function(vis,layers) {
+        var layer = layers[1].getSubLayer(0);
+        //layer.infowindow.set('template', $('#infowindow_template').html());
+        layer.infowindow.set('sanitizeTemplate', 'false');
+        layer.on('error', function(err) {
+          console.log('error: ' + err);
+        });
+      }).on('error', function() {
+        console.log("some error occurred");
+      });
+}
+</script>
+
+</body>
+</html>
